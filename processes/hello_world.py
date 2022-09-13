@@ -123,14 +123,15 @@ class HelloWorldProcessor(BaseProcessor):
         mimetype = 'application/json'
         name = data.get('name', None)
         geom = data.get('inputGeom', None)
-        jsonString = json.dumps(geom['value']);
+        jsonString = json.dumps(geom['value'])
 
         if name is None:
             raise ProcessorExecuteError('Cannot process without a name')
 
         raw_output = subprocess.run(
-            ['/process_scripts/zonal_stats.sh',
-            jsonString
+            [
+                '/process_scripts/zonal_stats.sh',
+                jsonString
             ],
             capture_output=True
         ).stdout
